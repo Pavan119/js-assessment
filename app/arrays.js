@@ -8,6 +8,7 @@ arraysAnswers = {
    */
   indexOf: function indexOf(arr, item) {
     // Implement a function, that returns the 0 based index of an element in an array.
+    return arr.indexOf(item);
   },
 
   /**
@@ -17,7 +18,7 @@ arraysAnswers = {
    * @returns {Number} The numerical sum of all items in arr.
    */
   sum: function sum(arr) {
-
+      return arr.reduce((acaccumulator,currvalue)=>acaccumulator+currvalue)
   },
 
   /**
@@ -28,7 +29,23 @@ arraysAnswers = {
    * @returns {Number[]} A new array containing all numbers from arr except item.
    */
   remove: function remove(arr, item) {
-
+    return arr.filter(function(value){
+      return value!=item;
+    });
+  },
+  
+  
+  removeWithoutCopy: function removeWithoutCopy(arr, item) {
+    var i,
+    arrLength = arr.length;
+  
+  for (i = 0; i < arrLength; i += 1) {
+    if (arr[i] === item) {
+      arr.splice(i, 1);
+      i = i - 1;
+    }
+  }
+  return arr;
   },
 
   /**
@@ -39,7 +56,8 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with item appended.
    */
   append: function append(arr, item) {
-
+    arr.push(item);
+    return arr;
   },
 
   /**
@@ -49,7 +67,8 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the last element removed..
    */
   truncate: function truncate(arr) {
-
+    arr.pop();
+    return arr;
   },
 
   /**
@@ -60,7 +79,8 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the first element item added
    */
   prepend: function prepend(arr, item) {
-
+    arr.unshift(item);
+    return arr;
   },
 
 
@@ -71,7 +91,8 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the first element item removed.
    */
   curtail: function curtail(arr) {
-
+    arr.shift();
+    return arr;
   },
 
   /**
@@ -82,7 +103,7 @@ arraysAnswers = {
    * @returns {Number[]} A new array, with elements from arr1 and arr2 in that order.
    */
   concat: function concat(arr1, arr2) {
-
+    return arr1.concat(arr2);
   },
 
   /**
@@ -94,7 +115,16 @@ arraysAnswers = {
    * @returns {Number[]} The array arr, with the number item inserted at position index.
    */
   insert: function insert(arr, item, index) {
+    var i,
+      arrLength = arr.length;
 
+    for (i = 0; i < arrLength; i += 1) {
+      if (i === index) {
+        arr.splice(i, 0, item);
+        arrLength += arrLength;
+      }
+    }
+    return arr;
   },
 
   /**
@@ -105,7 +135,16 @@ arraysAnswers = {
    * @returns {Number} The count of the number of times the number item appeared in arr.
    */
   count: function count(arr, item) {
-
+    var i,
+    count = 0,
+    arrLength = arr.length;
+  
+  for (i = 0; i < arrLength; i += 1) {
+    if (arr[i] === item) {
+      count += 1;
+    }
+  }
+  return count; 
   },
 
   /**
@@ -115,7 +154,27 @@ arraysAnswers = {
    * @returns {Number[]} An array of numbers that appear in arr more than once.
    */
   duplicates: function duplicates(arr) {
-
+    var i,
+    counts = [],
+    duplicates = [],
+    arrLength = arr.length,
+    countsLength;
+  
+  for (i = 0; i < arrLength; i += 1) {
+    if (counts[arr[i]] === undefined) {
+      counts[arr[i]] = 1;
+    } else {
+      counts[arr[i]] += 1;
+    }
+  }
+  
+  countsLength = counts.length;
+  for (i = 0; i < countsLength; i += 1) {
+    if (counts[i] > 1) {
+      duplicates.push(i);
+    }
+  }
+  return duplicates;
   },
 
   /**
@@ -125,7 +184,13 @@ arraysAnswers = {
    * @returns {Number[]} A new array of numbers that contains the elements of arr squared.
    */
   square: function square(arr) {
-
+    var i,
+    arrLength = arr.length;
+  
+  for (i = 0; i < arrLength; i += 1) {
+    arr[i] = arr[i] * arr[i];
+  }
+  return arr;
   },
 
   /**
@@ -136,6 +201,18 @@ arraysAnswers = {
    * @returns {Number[]} A new array of numbers which represent the indices of target in arr.
    */
   findAllOccurrences: function findAllOccurrences(arr, target) {
-
+    var i,
+    counts = [],
+    duplicates = [],
+    arrLength = arr.length,
+    countsLength;
+  
+  for (i = 0; i < arrLength; i += 1) {
+    if (arr[i] === target) {
+      duplicates.push(i);
+    }
+  }
+  
+  return duplicates;
   },
 };

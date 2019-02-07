@@ -10,7 +10,13 @@ stringsAnswers = {
    * @returns {String} A string with no more than amount number of repeated letters.
    */
   reduceString: function reduceString(str, amount) {
-
+    var match = str.match(/(\w)\1{1,}/g);
+    match.forEach(function(item) {
+      if(item.length > amount) {
+        str = str.replace(item, item.substr(0, amount));
+      }
+    });
+    return str;
   },
 
   /**
@@ -22,6 +28,6 @@ stringsAnswers = {
    * @returns {String} The original string of text str reversed.
    */
   reverseString: function reverseString(str) {
-
+    return str.split('').reverse().join('');
   },
 };
